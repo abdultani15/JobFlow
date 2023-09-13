@@ -1,12 +1,3 @@
-const createBtn = document.querySelector(".create-job-button");
-const deleteBtn = document.querySelector(".delete-button");
-const popup = document.querySelector(".popup");
-const overlay = document.querySelector(".overlay");
-const selectElement = document.querySelector(".jobCat");
-const jobPostingContainer = document.querySelectorAll(".status-main");
-const wishlistContainer = jobPostingContainer[0];
-let jobs = document.querySelectorAll(".job-posting");
-
 class User {
   constructor(userId, username, email, password) {
     this.userId = userId;
@@ -133,13 +124,30 @@ class App {
   }
 
   init() {
-    const form = document.querySelector("#custom-form");
-    form.addEventListener("submit", this.createJobPosting.bind(this));
-    createBtn.addEventListener("click", this.toggleForm.bind(this, true));
-    deleteBtn.addEventListener("click", this.toggleForm.bind(this, false));
+    this.cacheDomElements();
+    this.addListeners();
     this.populateSelect();
     this.doThings();
     this.attachHandlersToContainers();
+  }
+
+  cacheDomElements() {
+    this.createBtn = document.querySelector(".create-job-button");
+    this.deleteBtn = document.querySelector(".delete-button");
+    this.popup = document.querySelector(".popup");
+    this.overlay = document.querySelector(".overlay");
+    this.selectElement = document.querySelector(".jobCat");
+    this.jobPostingContainer = document.querySelectorAll(".status-main");
+    this.wishlistContainer = this.jobPostingContainer[0];
+    this.jobs = document.querySelectorAll(".job-posting");
+  }
+
+  addListeners() {
+    document
+      .querySelector("#custom-form")
+      .addEventListener("submit", this.createJobPosting.bind(this));
+    this.createBtn.addEventListener("click", this.toggleForm.bind(this, true));
+    this.deleteBtn.addEventListener("click", this.toggleForm.bind(this, false));
   }
 
   toggleForm(show) {
@@ -151,7 +159,7 @@ class App {
       const option = document.createElement("option");
       option.value = category.category;
       option.text = category.category;
-      selectElement.appendChild(option);
+      this.selectElement.appendChild(option);
     });
   }
 
@@ -171,9 +179,12 @@ class App {
     const job = new JobPosting(jobId, company, title, category);
     const jobPostingElementHTML = job.createJobElement();
 
-    wishlistContainer.insertAdjacentHTML("beforeend", jobPostingElementHTML);
+    this.wishlistContainer.insertAdjacentHTML(
+      "beforeend",
+      jobPostingElementHTML
+    );
 
-    const jobPostingElement = wishlistContainer.lastElementChild;
+    const jobPostingElement = this.wishlistContainer.lastElementChild;
 
     this.toggleForm(false);
     document.querySelectorAll(".jobInputs").forEach((el) => (el.value = ""));
@@ -208,8 +219,8 @@ class App {
   }
 
   doThings() {
-    jobs = document.querySelectorAll(".job-posting");
-    jobs.forEach((draggable) => {
+    this.jobs = document.querySelectorAll(".job-posting");
+    this.jobs.forEach((draggable) => {
       draggable.addEventListener("dragstart", () => {
         draggable.classList.add("dragging");
       });
@@ -220,7 +231,7 @@ class App {
   }
 
   attachHandlersToContainers() {
-    jobPostingContainer.forEach((container) => {
+    this.jobPostingContainer.forEach((container) => {
       container.addEventListener("dragover", (e) => {
         e.preventDefault();
         const draggable = document.querySelector(".dragging");
