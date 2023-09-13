@@ -30,7 +30,7 @@ class JobPosting {
 
   createJobElement() {
     const jobPosting = `
-    <div class="job-posting" draggable="true">
+    <div class="job-posting" draggable="true" data-job-id="${this.jobId}">
     <div class="job-logo"><i class="${this.getCategoryIcon()}"></i></div>
     <div class="job-desc">
       <h2 class="company-name">${this.company}</h2>
@@ -48,6 +48,10 @@ class JobPosting {
       (categoryObj) => categoryObj.category === this.category
     );
     return categoryObj ? categoryObj.iconClass : "";
+  }
+
+  setStatus(status) {
+    this.status = status;
   }
 }
 
@@ -119,7 +123,10 @@ class App {
       { category: "Research and Analysis", iconClass: "bx bxs-search-alt-2" },
       { category: "Humanities and Social Sciences", iconClass: "bx bxs-book" },
     ];
-
+    this.user = new User("1", "exampleUser", "user@example.com", "password");
+    this.users = [];
+    this.users.push(this.user);
+    console.log(this.users);
     this.init();
   }
 
@@ -177,6 +184,7 @@ class App {
     const jobId = this.generateJobId();
 
     const job = new JobPosting(jobId, company, title, category);
+    this.user.postingList.push(job);
     const jobPostingElementHTML = job.createJobElement();
 
     this.wishlistContainer.insertAdjacentHTML(
@@ -235,9 +243,31 @@ class App {
       container.addEventListener("dragover", (e) => {
         e.preventDefault();
         const draggable = document.querySelector(".dragging");
-        container.appendChild(draggable);
+        if (draggable && draggable.classList.contains("job-posting")) {
+          const jobId = draggable.dataset.jobId;
+          const newStatus = container.dataset.status;
+
+          const jobPosting = this.findJobPostingById(jobId);
+          if (jobPosting) {
+            jobPosting.setStatus(newStatus);
+          }
+          container.appendChild(draggable);
+        } else {
+          console.log("not posting");
+        }
       });
     });
+  }
+
+  findJobPostingById(jobId) {
+    for (const user of this.users) {
+      for (const jobPosting of user.postingList) {
+        if (jobPosting.jobId === jobId) {
+          return jobPosting;
+        }
+      }
+    }
+    return null;
   }
 }
 
