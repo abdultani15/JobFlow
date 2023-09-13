@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Flow</title>
+
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="img/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <nav id="sidebar">
+      <h1 class="sidebar-header">
+        <i class="bx bx-braille logo-color"></i>Job Flow
+      </h1>
+      <main>
+        <ul class="sidebar-links">
+          <li class="link active">
+            <a href=""><i class="bx bx-home-alt-2"></i> Dashboard</a>
+          </li>
+          <li class="link">
+            <a href=""><i class="bx bx-user"></i> Profile</a>
+          </li>
+          <li class="link">
+            <a href=""><i class="bx bx-cog"></i> Settings</a>
+          </li>
+          <li class="link">
+            <a href=""><i class="bx bx-log-out"></i> Log Out</a>
+          </li>
+        </ul>
+      </main>
+      <footer>
+        <p>&copy;2023 Job Flow. All rights reserved.</p>
+      </footer>
+    </nav>
+    <div class="main">
+      <div class="top-section">
+        <h1>Hello <span class="user-name">Abdul</span></h1>
+        <div>
+          <button class="create-job-button">Create New</button>
+
+          <div class="overlay" id="overlay"></div>
+          <div class="popup" id="popup">
+            <div class="job-posting-header"><h3>Add a job</h3></div>
+            <form id="custom-form" autocomplete="off">
+              <label for="jobCompany">Company</label> <br />
+              <input
+                class="jobInputs"
+                type="text"
+                name="jobCompany"
+                placeholder="Company"
+                required
+              /><br />
+
+              <label for="jobTitle">Job Title</label> <br />
+              <input
+                class="jobInputs"
+                type="text"
+                name="jobTitle"
+                placeholder="Job Title"
+                required
+              /><br />
+              <label for="jobCat">Category</label> <br />
+              <select class="jobInputs jobCat" name="jobCat" name="jobCat">
+                <option value="" disabled selected>Select Category</option>
+              </select>
+              <button class="create-job-button delete-button" type="reset">
+                Delete
+              </button>
+              <button class="create-job-button save-button" type="submit">
+                Save
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-section">
+        <div class="wishlist-container status-columns">
+          <div class="status-header">
+            <h3>Wishlist&nbsp</h3>
+            <i class="bx bx-star"></i>
+          </div>
+          <div class="status-main">
+            <div class="job-posting" draggable="true">
+              <div class="job-logo"><i class="bx bx-code-alt"></i></div>
+              <div class="job-desc">
+                <h2 class="company-name">Google</h2>
+                <h3 class="company-position">Software Developer</h3>
+                <h4 class="company-date">Date: <span>Jan,15 2024</span></h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="applied-container status-columns">
+          <div class="status-header">
+            <h3>Applied&nbsp</h3>
+            <i class="bx bx-task"></i>
+          </div>
+          <div class="status-main"></div>
+        </div>
+        <div class="interview-container status-columns">
+          <div class="status-header">
+            <h3>Interview&nbsp</h3>
+            <i class="bx bx-phone"></i>
+          </div>
+          <div class="status-main"></div>
+        </div>
+        <div class="offer-container status-columns">
+          <div class="status-header">
+            <h3>Offered&nbsp</h3>
+            <i class="bx bx-briefcase-alt"></i>
+          </div>
+          <div class="status-main"></div>
+        </div>
+        <div class="rejected-container status-columns">
+          <div class="status-header">
+            <h3>Rejected&nbsp</h3>
+            <i class="bx bx-message-alt-x"></i>
+          </div>
+          <div class="status-main"></div>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
