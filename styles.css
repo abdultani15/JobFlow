@@ -29,19 +29,21 @@ body {
 }
 
 #sidebar {
-  width: fit-content;
+  /* width: 12.5%; */
+  width: 10%;
   height: 100vh;
   background-color: var(--color-secondary);
 
   /* border-top-right-radius: 20px;
-  border-bottom-right-radius: 20px; */
+    border-bottom-right-radius: 20px; */
   display: grid;
   grid-template-rows: 10% 85% 5%;
 }
 
 .sidebar-header {
   color: var(--color-text);
-  font-size: 40px;
+  /* font-size: 40px; */
+  font-size: 30px;
   margin: auto;
   font-weight: 700;
 }
@@ -58,8 +60,10 @@ body {
 .link {
   display: flex;
   align-items: center;
-  height: 75px;
-  font-size: 28px;
+  /* height: 75px; */
+  height: 55px;
+  /* font-size: 28px; */
+  font-size: 18px;
   padding-left: 20px;
 }
 
@@ -73,7 +77,7 @@ i {
 }
 
 .link a:hover {
-  color: var(--color-tempUntil2);
+  color: var(--color-accent);
   transform: translate(10px);
 }
 
@@ -97,8 +101,10 @@ h5 {
   height: 10%;
   display: flex;
   justify-content: space-between;
-  align-items: end;
-  padding: 0 2%;
+  align-items: center;
+  /* align-items: end; */
+  /* padding: 0 2%; */
+  padding: 0 0.833%;
   color: var(--color-text);
   font-size: 2em;
 }
@@ -120,28 +126,36 @@ h5 {
 
 .bottom-section {
   display: grid;
-  grid-template-columns: repeat(5, 18%);
+  grid-template-columns: repeat(5, 19%);
   height: 90%;
   justify-content: space-evenly;
   align-items: center;
+  /* gap: 0; */
 }
 
 .status-columns {
   background-color: white;
-  height: 90%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.23);
-  border-radius: 2.5px;
+  height: 95%;
+  padding: 10px 0;
+  margin-bottom: 5%;
+  /* height: 50em; */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.1);
+  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.23); */
+  border-radius: 10px;
+  /* border: 1px solid #000000; */
 }
 
 .status-header {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-accent);
-  background-color: #8fb3d1;
-  color: white;
+  /* background-color: var(--color-accent); */
+  /* background-color: #8fb3d1; */
+  /* color: white; */
+  color: var(--color-text);
   height: 10%;
   font-size: 1.5em;
+  /* border-bottom: 1px solid #000000; */
 }
 
 .status-main {
@@ -152,10 +166,13 @@ h5 {
 
 .job-posting {
   display: flex;
-  background-color: red;
+  /* background-color: rgb(37, 111, 240); */
+  background-color: #1463f3;
   color: white;
   height: 15%;
-  margin-bottom: 10px;
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.23);
 }
 
 .job-logo {
@@ -196,7 +213,7 @@ h5 {
 }
 
 .popup {
-  display: none;
+  /* display: none; */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -213,7 +230,7 @@ h5 {
 }
 
 .overlay {
-  display: none;
+  /* display: none; */
   position: fixed;
   top: 0;
   left: 0;
