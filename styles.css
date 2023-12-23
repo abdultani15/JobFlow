@@ -1,19 +1,25 @@
 /* ---------- Root Variabels ---------- */
 :root {
   --color-background: #e3e9f5;
-  --color-primary: #2a2a2a;
-  --color-secondary: #fcfcfc;
+  --color-primary: #fcfcfc;
   --color-accent: #8fb3d1;
-  --color-text: #030307;
-  --color-background-dark: #030307;
-  --color-secondary-dark: #303030;
+  --color-text: #707070;
   --color-accent-dark: #b0b8d0;
   --color-text-dark: #c9cad9;
-  --color-success: #66bb6a;
-  --color-warning: #ef5350;
-  --color-text: #707070;
-  --color-tempUntil: #c9cad9;
+  --color-delete: #ef5350;
   --color-tempUntil2: #566591;
+  --color-jobPosting: #1463f3;
+
+  --color-background-dark: #030307;
+  --color-primary-dark: #2a2a2a;
+  --color-sun: #030307;
+}
+
+.darkmode {
+  --color-background: #030307;
+  --color-primary: #2a2a2a;
+  --color-text-dark: #c9cad9;
+  --color-sun: yellow;
 }
 
 * {
@@ -23,26 +29,20 @@
 
 body {
   background-color: var(--color-background);
-
   display: flex;
   font-family: "Roboto", sans-serif;
 }
 
 #sidebar {
-  /* width: 12.5%; */
   width: 10%;
   height: 100vh;
-  background-color: var(--color-secondary);
-
-  /* border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px; */
+  background-color: var(--color-primary);
   display: grid;
   grid-template-rows: 10% 85% 5%;
 }
 
 .sidebar-header {
   color: var(--color-text);
-  /* font-size: 40px; */
   font-size: 30px;
   margin: auto;
   font-weight: 700;
@@ -60,9 +60,7 @@ body {
 .link {
   display: flex;
   align-items: center;
-  /* height: 75px; */
   height: 55px;
-  /* font-size: 28px; */
   font-size: 18px;
   padding-left: 20px;
 }
@@ -85,8 +83,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: var(--color-secondary);
-  font-size: 16px;
+  font-size: 10px;
 }
 
 h1,
@@ -102,16 +99,14 @@ h5 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* align-items: end; */
-  /* padding: 0 2%; */
   padding: 0 0.833%;
   color: var(--color-text);
   font-size: 2em;
 }
 
 .create-job-button {
-  background-color: #8fb3d1;
-  color: white;
+  background-color: var(--color-accent);
+  color: var(--color-primary);
   padding: 16px 32px;
   text-align: center;
   font-size: 1em;
@@ -130,32 +125,24 @@ h5 {
   height: 90%;
   justify-content: space-evenly;
   align-items: center;
-  /* gap: 0; */
 }
 
 .status-columns {
-  background-color: white;
+  background-color: var(--color-primary);
   height: 95%;
   padding: 10px 0;
   margin-bottom: 5%;
-  /* height: 50em; */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.1);
-  /* box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.23); */
   border-radius: 10px;
-  /* border: 1px solid #000000; */
 }
 
 .status-header {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background-color: var(--color-accent); */
-  /* background-color: #8fb3d1; */
-  /* color: white; */
   color: var(--color-text);
   height: 10%;
   font-size: 1.5em;
-  /* border-bottom: 1px solid #000000; */
 }
 
 .status-main {
@@ -166,13 +153,31 @@ h5 {
 
 .job-posting {
   display: flex;
-  /* background-color: rgb(37, 111, 240); */
-  background-color: #1463f3;
-  color: white;
+  position: relative;
+  background-color: var(--color-jobPosting);
+  color: var(--color-primary);
   height: 15%;
   margin: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16), 0 2px 6px rgba(0, 0, 0, 0.23);
+  cursor: pointer;
+}
+
+.trashcan {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: var(--color-delete);
+  font-size: 20px;
+  display: none;
+}
+
+.job-posting:hover .trashcan {
+  display: block;
+}
+
+.trashcan:hover {
+  filter: brightness(0.75);
 }
 
 .job-logo {
@@ -182,6 +187,14 @@ h5 {
   justify-content: center;
   align-items: center;
   font-size: 2.5em;
+}
+
+.job-logo img {
+  width: 80%;
+  height: auto;
+  background-color: var(--color-primary);
+  border-radius: 10%;
+  padding: 2px;
 }
 
 .job-desc {
@@ -213,7 +226,6 @@ h5 {
 }
 
 .popup {
-  /* display: none; */
   position: fixed;
   top: 50%;
   left: 50%;
@@ -230,13 +242,13 @@ h5 {
 }
 
 .overlay {
-  /* display: none; */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(144, 179, 208, 0.95);
+  background-color: #1f51ff;
+  opacity: 70%;
   z-index: 900;
 }
 
@@ -252,7 +264,7 @@ h5 {
 }
 
 .delete-button {
-  background-color: var(--color-warning);
+  background-color: var(--color-delete);
 }
 
 .save-button {
@@ -270,4 +282,217 @@ h5 {
 
 .job-posting.dragging {
   opacity: 0.5;
+}
+
+.searchbar-div input {
+  padding: 10px;
+  border: 1px solid gray;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.hide {
+  display: none !important;
+}
+
+.login-page {
+  position: absolute;
+  background-image: linear-gradient(
+    to right bottom,
+    #b5c8e5,
+    #9db8e4,
+    #87a7e3,
+    #7196e1,
+    #5d85de
+  );
+  width: 100%;
+  height: 100%;
+}
+
+#auth-form {
+  position: relative;
+  width: 380px;
+  height: 480px;
+  background-color: white;
+  border-radius: 5%;
+  padding: 5px;
+  margin: 8% auto;
+  overflow: hidden;
+}
+
+.button-box {
+  width: 220px;
+  margin: 35px auto;
+  position: relative;
+  box-shadow: 0 0 20px 9px #ff61241f;
+  border-radius: 30px;
+}
+
+.toggle-btn {
+  padding: 10px 30px;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  outline: none;
+  position: relative;
+}
+
+#btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 110px;
+  height: 100%;
+  background-image: linear-gradient(
+    to right bottom,
+    #0001ff,
+    #4a38ff,
+    #6b58ff,
+    #8674ff,
+    #9e90ff
+  );
+  border-radius: 30px;
+  transition: 0.5s;
+}
+
+.login-inputs {
+  top: 180px;
+  position: absolute;
+  width: 280px;
+  transition: 0.5s;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px 0;
+  margin: 5px 0;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  border-bottom: 1px solid #999;
+  outline: none;
+  background: transparent;
+}
+
+.submit-btn {
+  width: 85%;
+  padding: 10px 30px;
+  cursor: pointer;
+  display: block;
+  margin: auto;
+  background-image: linear-gradient(
+    to right bottom,
+    #0001ff,
+    #4a38ff,
+    #6b58ff,
+    #8674ff,
+    #9e90ff
+  );
+  border: 0;
+  outline: none;
+  border-radius: 30px;
+}
+
+.check-box {
+  margin: 30px 10px 30px 0;
+}
+
+#login {
+  left: 50px;
+}
+
+#register {
+  left: 450px;
+}
+
+.profile-bottom-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+}
+
+.profile-main-content {
+  width: 98.5%;
+  height: 95%;
+  padding: 10px 0;
+  margin-bottom: 15px;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1), 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.profile-pic-bio-div {
+  display: flex;
+  width: 100%;
+  height: 30%;
+}
+
+.profile-pic {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 20%;
+  height: 100%;
+}
+
+.profile-pic img {
+  height: 70%;
+  border-radius: 50%;
+}
+
+.bio-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 50%;
+  height: 100%;
+}
+
+.profile-values {
+  width: 100%;
+  height: 100%;
+}
+
+.profile-values input {
+  height: 35px;
+  width: 220px;
+  padding: 5px;
+}
+
+#profile-form {
+  height: 100%;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+}
+
+.input {
+  margin: 20px;
+  margin-left: 75px;
+}
+
+.darkmode-div {
+  display: flex;
+  font-size: 20px;
+  margin: 20px;
+}
+
+#darkmode-moon {
+  font-size: 30px;
+  cursor: pointer;
+  margin-left: 25px;
+}
+
+.bxs-sun {
+  color: var(--color-sun);
 }

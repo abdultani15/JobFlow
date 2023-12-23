@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Job Flow</title>
-
     <link
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
@@ -17,25 +16,96 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script type="module" src="js/controller.js"></script>
+    <script type="module" src="js/model.js"></script>
+    <script type="module" src="js/view.js"></script>
   </head>
   <body>
-    <nav id="sidebar">
+    <div class="login-page hide">
+      <div id="auth-form">
+        <div class="button-box">
+          <div id="btn"></div>
+          <button type="button" class="toggle-btn login-form-btn">
+            Log In
+          </button>
+          <button type="button" class="toggle-btn register-form-btn">
+            Register
+          </button>
+        </div>
+        <form id="login" class="login-inputs">
+          <input
+            type="email"
+            class="input-field"
+            placeholder="Email"
+            id="userEmail"
+            autocomplete="off"
+            required
+          />
+          <input
+            type="password"
+            class="input-field"
+            placeholder="Enter Password"
+            id="userPassword"
+            required
+          />
+          <input type="checkbox" class="check-box" /><span
+            >Remember Password</span
+          >
+          <button type="button" id="login-btn" class="submit-btn">
+            Log In
+          </button>
+        </form>
+        <form id="register" class="login-inputs">
+          <input
+            type="text"
+            class="input-field"
+            placeholder="Username"
+            id="registerUsername"
+            required
+          />
+          <input
+            type="email"
+            class="input-field"
+            placeholder="Email"
+            id="registerEmail"
+            required
+          />
+          <input
+            type="password"
+            class="input-field"
+            placeholder="Enter Password"
+            id="registerPassword"
+            required
+          />
+
+          <input type="checkbox" class="check-box" /><span
+            >I agree to the terms & conditions</span
+          >
+          <button type="button" id="register-btn" class="submit-btn">
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
+    <nav id="sidebar" class="hide">
       <h1 class="sidebar-header">
         <i class="bx bx-braille logo-color"></i>Job Flow
       </h1>
       <main>
         <ul class="sidebar-links">
           <li class="link active">
-            <a href=""><i class="bx bx-home-alt-2"></i> Dashboard</a>
+            <a href="" id="dashboard-link"
+              ><i class="bx bx-home-alt-2"></i> Dashboard</a
+            >
           </li>
           <li class="link">
-            <a href=""><i class="bx bx-user"></i> Profile</a>
+            <a href="" id="profile-link"><i class="bx bx-user"></i> Profile</a>
           </li>
           <li class="link">
-            <a href=""><i class="bx bx-cog"></i> Settings</a>
+            <a href="" id="settings-link"><i class="bx bx-cog"></i> Settings</a>
           </li>
           <li class="link">
-            <a href=""><i class="bx bx-log-out"></i> Log Out</a>
+            <a href="" id="logout-btn"><i class="bx bx-log-out"></i> Log Out</a>
           </li>
         </ul>
       </main>
@@ -43,14 +113,16 @@
         <p>&copy;2023 Job Flow. All rights reserved.</p>
       </footer>
     </nav>
-    <div class="main">
+    <div id="dashboard" class="main hide">
       <div class="top-section">
-        <h1>Hello <span class="user-name">Abdul</span></h1>
+        <div class="searchbar-div">
+          <input type="text" placeholder="Search..." />
+        </div>
         <div>
-          <button class="create-job-button">Create New</button>
+          <button class="create-job-button">+</button>
 
-          <div class="overlay" id="overlay"></div>
-          <div class="popup" id="popup">
+          <div class="overlay hidden" id="overlay"></div>
+          <div class="popup hidden" id="popup">
             <div class="job-posting-header"><h3>Add a job</h3></div>
             <form id="custom-form" autocomplete="off">
               <label for="jobCompany">Company</label> <br />
@@ -90,16 +162,7 @@
             <h3>Wishlist&nbsp</h3>
             <i class="bx bx-star"></i>
           </div>
-          <div class="status-main" data-status="wishlist">
-            <div class="job-posting" draggable="true" data-job-id="1">
-              <div class="job-logo"><i class="bx bx-code-alt"></i></div>
-              <div class="job-desc">
-                <h2 class="company-name">Google</h2>
-                <h3 class="company-position">Software Developer</h3>
-                <h4 class="company-date">Date: <span>Jan,15 2024</span></h4>
-              </div>
-            </div>
-          </div>
+          <div class="status-main" data-status="wishlist"></div>
         </div>
         <div class="applied-container status-columns">
           <div class="status-header">
@@ -115,12 +178,12 @@
           </div>
           <div class="status-main" data-status="interview"></div>
         </div>
-        <div class="offer-container status-columns">
+        <div class="offered-container status-columns">
           <div class="status-header">
             <h3>Offered&nbsp</h3>
             <i class="bx bx-briefcase-alt"></i>
           </div>
-          <div class="status-main" data-status="offer"></div>
+          <div class="status-main" data-status="offered"></div>
         </div>
         <div class="rejected-container status-columns">
           <div class="status-header">
@@ -131,6 +194,85 @@
         </div>
       </div>
     </div>
-    <script src="index.js"></script>
+    <div id="profile" class="main hide">
+      <div class="top-section">
+        <h1><b>Profile</b></h1>
+      </div>
+      <div class="profile-bottom-section">
+        <div class="profile-main-content">
+          <div class="profile-values">
+            <form id="profile-form" autocomplete="off">
+              <div class="profile-pic-bio-div">
+                <div class="profile-pic">
+                  <img src="/default-profile-pic.png" alt="" />
+                </div>
+                <div class="bio-div">
+                  <h1>Biography</h1>
+                  <textarea
+                    name=""
+                    id="bio"
+                    cols="100"
+                    rows="10"
+                    placeholder="Add Bio..."
+                  ></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input">
+                  <label for="firstName"><h2>First Name</h2></label> <br />
+                  <input
+                    class="jobInputs"
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    placeholder="Add First Name..."
+                  /><br />
+                </div>
+                <div class="input">
+                  <label for="lastName"><h2>Last Name</h2></label> <br />
+                  <input
+                    class="jobInputs"
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    placeholder="Add Last Name..."
+                  /><br />
+                </div>
+              </div>
+              <div class="row">
+                <div class="input">
+                  <label for="phoneNumber"><h2>Phone Number</h2></label> <br />
+                  <input
+                    class="jobInputs"
+                    type="text"
+                    name="phoneNumber"
+                    id="phoneNumber"
+                    placeholder="Add Phone Number..."
+                  /><br />
+                </div>
+              </div>
+              <div class="row input">
+                <button class="create-job-button save-button" type="submit">
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="settings" class="main hide">
+      <div class="top-section">
+        <h1><b>Settings</b></h1>
+      </div>
+      <div class="profile-bottom-section">
+        <div class="profile-main-content setting-main-content">
+          <div class="darkmode-div">
+            <h2>Dark Mode:</h2>
+            <i class="bx bxs-sun" id="darkmode-moon"></i>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
